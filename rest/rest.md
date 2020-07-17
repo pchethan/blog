@@ -71,8 +71,9 @@ Uniform Interface (aka REST API) is one of the distinguishing style/constraint o
 
 REST is also mistakenly equated to features of HTTP. To understand uniform-interface, its best to proceed with notion that REST interfaces can be used over something other than HTTP, like say, ftp. Underlying protocol like HTTP is unimportant.
 
-![](RackMultipart20200717-4-1ovh49_html_1c1126a5e758ea4b.png)
-Fig: A generic component providing a generic interface
+
+![](restinterface.png)
+<p style="text-align: center;">Fig: A generic component providing a generic interface</p>
 
 ## &#39;Interfaces&#39;
 
