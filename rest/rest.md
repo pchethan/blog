@@ -1,60 +1,56 @@
 # REST
 
-Authoritative source is Roy Fielding&#39;s dissertation.
+Roy Fielding's dissertation is the authoritative source for REST (Representational State Transfer) 
 
-REST (Representational State Transfer) is an architectural style for designing network-based application software.
+REST is an architectural style for designing network-based application software.
 
-It is an aggregation of various network based architectural styles, which, together, synergestically provide a network based application - the ability to achieve internet scale.
+It is an aggregation of various network based architectural styles, which, together, synergestically provide internet scale to any network based application.
 
-[These styles are also often termed as constraints]
+##Five Network Styles
 
-| Styles used by REST | Styles NOT used by REST |
+| Network Styles used by REST | Network Styles NOT used by REST |
 | --- | --- |
 | Client-Server | _Pipe Filter / Uniform Pipe Filter_ |
 | Stateless requests between Client-Server | _Remote Session/Data Access/Evaluation_ |
-| Layered systems between Client-Server (LS)(proxies, gateways, firewalls) | _Event Based Integration_ |
+| Layered systems between Client-Server (proxies, gateways, firewalls) | _Event Based Integration_ |
 | COD (Code on Demand) | _(Brokered) Distributed Objects_ |
-| Cache |
- |
-| Uniform Interface (aka REST API) |
- |
-|
- |
- |
+| Cache | |
 
-Brief introduction to above styles:
+Brief notes on these styles:
 
-1. Client-Server
+1. Client-Server:
 
-Separation of concerns. These are roles. Server provides services on request. Usually clients concern is UI.
+    Separation of concerns. These are roles. Server provides services on request. Usually clients concern is UI.
 
-1. Statelessness
+1. Statelessness: 
 
-State occupies space in memory and disk which are at premium at server. Prevents scaling. So interfaces are designed such that server does not promise to hold any data for future requests. Requests and responses therefore include all the information required.
+    State per client request/session occupies space in memory and disk which are at a premium on servers. Prevents scaling. Using this style means that the interfaces are designed such that server never holds any data for future requests. Requests and responses therefore include all the information required.
 
 1. Layered Systems
-  1. Multiple systems coud be layered between client and server. An arrangement of systems in a unix pipe like fashion could lead to feature rich system.
-  2. Systems participating in data path help with security and many rich transformation features
-  3. Systems participating in connections help with scale (proxies and gateways)
+    - Multiple systems could be layered between client and server. An arrangement of systems in a unix pipe like fashion could lead to feature rich system.
+    - Systems participating in data path help with security and many rich transformation features
+    - Systems participating in routing help with scale (proxies and gateways)
 
-1. Code-on-demand
+1. Code-on-demand: 
 
-Download the &#39;know-how&#39; code and run on client. The &#39;know-how&#39; could be understanding server reponses, rendering them and even how to interact with server and get responses. An angular app is an example.
+    Download the 'know-how'; code and run on client. The 'know-how' could be understanding server responses, rendering them and even how to interact with server and get responses. An angular app is an example.
 
 1. Cache
 
-Cache provides interface of a server and consumes interface of a server and provides caching in a transparent way. It can be part of layered systems or could be just a library at client or any layered systems.
+    Cache provides interface of a server and consumes interface of a server and provides caching in a transparent way. It can be part of layered systems or could be just a library at client or any layered systems.
+
 
 Here is what an application gains by using REST.
 
-| User Perceived Performance | Cache provides improved average latency |
+| Metric | Benefit |
 | --- | --- |
-| Efficiency | Cache provides efficiency by avoiding duplicate workCOD means that user interacts locally rather than through remote connections/sessions |
-| Scalability | Client-Server style provides scalability by simplifying the server components by removing UI concernStatelessness - Not having to store state between requests allows the server component to quickly free resourcesLS - Intermediaries between client and server forming layers could be used for load balancing and thereby support more usersCOD improves scaling since it can off-load work to the client that would otherwise have consumed its resources |
-| Simplicity | Client-Server style provides simplicity because UI and Server are untangledDue to statelessness, server doesn&#39;t have to manage resource usage across requests. |
+| User Perceived Performance | Cache provides improved average latency |
+| Efficiency |Cache provides efficiency by avoiding duplicate work. <br/><br/>COD means that user interacts locally rather than through remote connections/sessions |
+| Scalability | Client-Server style provides scalability by simplifying the server components by removing UI concernStatelessness <br/><br/> Not having to store state between requests allows the server component to quickly free resourcesLS <br/><br/>Intermediaries between client and server forming layers could be used for load balancing and thereby support more users<br/><br/>COD improves scaling since it can off-load work to the client that would otherwise have consumed its resources |
+| Simplicity | Client-Server style provides simplicity because UI and Server are untangled<br/><br/>Due to statelessness, server doesn&#39;t have to manage resource usage across requests. |
 | Extensibility/Configurability | COD provides ability to add features to a deployed client |
-| Evolvability | Client-Server - Allows the UI and Servers to evolve independentlyLS - Allows intermediaries to evolve independently.Uniform Interface - Implementations are decoupled from the services they provide |
-| Visibility | Statelessness - All relevant data is in one place, i.e., requestUniform Interface - Information is transferred in a standardized form, and messages are self-descriptive |
+| Evolvability | Client-Server - Allows the UI and Servers to evolve independently<br/><br/>LS - Allows intermediaries to evolve independently.Uniform Interface - Implementations are decoupled from the services they provide |
+| Visibility | Statelessness - All relevant data is in one place, i.e., request<br/><br/>Uniform Interface - Information is transferred in a standardized form, and messages are self-descriptive |
 | Reliability | Statelessness eases the task of recovering from partial failures |
 | Reusability | LS - with well defined incoming and outgoing, components become more portable and reusable.Allows reflective monitoring at all levels and improves failure management |
 | Portability | LS - with well defined incoming and outgoing, components become more portable and reusable. |
@@ -63,18 +59,17 @@ There are some tradeoffs as well:
 
 | Network Perf | Statelessness degraded due to repetitive data. |
 | --- | --- |
-| User Perc Perf | LS - Intermediaries from client-server cause overhead due to layers |
+| User Perceived Performance | LS - Intermediaries from client-server cause overhead due to multiple hops |
 | Efficiency | Uniform interface degrades efficiency since information is transferred in a standardized form rather than one which is specific to an application&#39;s needs. |
 
-REST is not an all or nothing proposition. There are significant benefits to be gained from partial adoption.
-
-However, Fielding [does not agree](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven) to the idea calling an API as restful, unless all constraints are applied.
+###Note
+So, although Roy Fielding [does not agree](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven) to the idea calling an API as restful, unless all constraints are applied, REST is not an all or nothing proposition. there are significant benefits to be gained from partial adoption.
 
 ## Uniform Interface
 
-Uniform Interface (aka REST API) is one of the distinguishing styles of REST. However, commonly, RESTfulness is often incorrectly referred to this alone.
+Uniform Interface (aka REST API) is one of the distinguishing style/constraint of REST. However, commonly, RESTfulness is incorrectly referred to this constraint alone.
 
-REST is also mistakenly equated to features of HTTP. To understand uniform-interface, its best to proceed with notion that REST interfaces can be used over something other than HTTP, like email. Underlying protocol like HTTP is unimportant.
+REST is also mistakenly equated to features of HTTP. To understand uniform-interface, its best to proceed with notion that REST interfaces can be used over something other than HTTP, like say, ftp. Underlying protocol like HTTP is unimportant.
 
 ![](RackMultipart20200717-4-1ovh49_html_1c1126a5e758ea4b.png)
 Fig: A generic component providing a generic interface
@@ -283,3 +278,4 @@ For example, a bank client app can
   - Or, it displays a list where each item corresponds to a relationship.
 - Be programmed to take action on a resource
   - On navigation to credit card resource, a client could provide option to hotlist a card. As part of media type definition, clients must know that &#39;hotlist&#39; is an action and client must POST. On confirmation from user, client invokes the API.
+
